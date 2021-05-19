@@ -7,7 +7,6 @@ import { readCSV, writeCSV } from 'https://deno.land/x/flat@0.0.10/mod.ts'
 // Step 1: Read the downloaded_filename JSON
 const filename = Deno.args[0]
 const records = await readCSV(filename)
-console.log(records)
 
 // Step 2: Filter specific data we want to keep and write to a new CSV file
 const processedRecords = records.map(record => {
@@ -17,7 +16,7 @@ const processedRecords = records.map(record => {
 	}
     return picked;
 });
-
+console.log(processedRecords);
 // Step 3. Write a new JSON file with our filtered data
 const newFilename = `data-postprocessed.csv`
 await writeCSV(newFilename, processedRecords)
