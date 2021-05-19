@@ -12,7 +12,7 @@ const records = await readCSV(filename)
 const processedRecords = records.map(record => {
     const picked = {};
     for (let prop of Object.keys(record)) {
-		if (/(datum|anzahlMKumuliert|genesenKumuliert|krankKumuliert|verstorbenKumuliert|rateM7Tage)/gi.test(prop)) picked[prop] = record[prop];
+		if (/^(datum|anzahlMKumuliert|genesenKumuliert|krankKumuliert|verstorbenKumuliert|rateM7Tage)/gi.test(prop)) picked[prop] = record[prop];
 	}
     return picked;
 });
