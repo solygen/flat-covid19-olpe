@@ -19,3 +19,4 @@ jobs:
         with:
           http_url: https://www.lzg.nrw.de/covid19/daten/covid19_5966.csv
           downloaded_filename: data.csv
+          postprocess: postprocess.js
