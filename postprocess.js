@@ -13,7 +13,7 @@ console.log(records)
 const processedRecords = records.map(record => {
     const picked = {};
     for (let prop of Object.keys(record)) {
-		if (!/(Kumuliert|7Tage|Vortag)/gi.test(prop)) picked[prop] = record[prop];
+		if (/(datum|anzahlMKumuliert|genesenKumuliert|krankKumuliert|verstorbenKumuliert|rateM7Tage)/gi.test(prop)) picked[prop] = record[prop];
 	}
     return picked;
 });

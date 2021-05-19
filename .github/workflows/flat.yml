@@ -6,6 +6,7 @@ on:
   push:
     paths:
       - .github/workflows/flat.yml
+      - postprocess.js
 jobs:
   scheduled:
     runs-on: ubuntu-latest
