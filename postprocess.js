@@ -6,17 +6,20 @@ import { readCSV, writeCSV } from 'https://deno.land/x/flat@0.0.10/mod.ts'
 
 // Step 1: Read the downloaded_filename JSON
 const filename = Deno.args[0]
-const csv = await readCSV(filename)
-console.log(csv)
+const records = await readCSV(filename)
+console.log(records)
 
 // Step 2: Filter specific data we want to keep and write to a new CSV file
-// const currencyRates = Object.values(json.bpi);
-// const filteredCurrencyRates = currencyRates.map(rate => ({
-//     currency: rate.description,
-//     bitcoinRate: rate.rate
-// }));
+const processedRecords = records.map(record => {
+    console.log(record);
+    const picked = {};
+    for (let prop of record) {
+		if (!/(Kumuliert|7Tage|Vortag)/gi.test(prop)) picked[prop] = obj[prop];
+	}
+    return picked;
+});
 
 // Step 3. Write a new JSON file with our filtered data
 const newFilename = `data-postprocessed.csv`
-await writeCSV(newFilename, csv)
+await writeCSV(newFilename, processedRecords)
 console.log("Wrote a post process file")
