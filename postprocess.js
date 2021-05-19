@@ -11,10 +11,9 @@ console.log(records)
 
 // Step 2: Filter specific data we want to keep and write to a new CSV file
 const processedRecords = records.map(record => {
-    console.log(record);
     const picked = {};
-    for (let prop of record) {
-		if (!/(Kumuliert|7Tage|Vortag)/gi.test(prop)) picked[prop] = obj[prop];
+    for (let prop of Object.keys(record)) {
+		if (!/(Kumuliert|7Tage|Vortag)/gi.test(prop)) picked[prop] = record[prop];
 	}
     return picked;
 });
