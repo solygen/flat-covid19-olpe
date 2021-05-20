@@ -12,9 +12,9 @@ const records = await readCSV(filename)
 const allrecords = await readCSV(`data-history.csv`)
 console.log(records.length, allrecords.length);
 records.forEach(record => {
-    console.log(record.datum)
     const existing = allrecords.filter(obj => {
-        return obj.datum === record.datum
+        console.log(obj.datum, record.datum, String(obj.datum) === String(record.datum);
+        return String(obj.datum) === String(record.datum)
     });
     if (existing) {
         // update
