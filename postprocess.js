@@ -13,27 +13,23 @@ const allrecords = await readCSV(`data-history.csv`)
 console.log(records.length, allrecords.length);
 records.forEach(record => {
     const existing = allrecords.find(obj => {
-        //console.log(obj.datum, record.datum, String(obj.datum) === String(record.datum));
         return String(obj.datum) === String(record.datum)
     });
     if (existing) {
         // update
-        console.log('update');
         Object.assign(existing, record)
     } else {
         // push
-        console.log('push');
         allrecords.push(record)
     }
 });
 await writeCSV(`data-history.csv`, allrecords)
-console.log(records.length, allrecords.length);
 
 // Step 3: Filter specific data we want to keep and write to a new CSV file
 const processedRecords = allrecords.map(record => {
     const picked = {};
     for (let prop of Object.keys(record)) {
-		if (/^(datum|anzahlMKumuliert|genesenKumuliert|krankKumuliert|verstorbenKumuliert|rateM7Tage)/gi.test(prop)) picked[prop] = record[prop];
+		if (/^(datum|anzahlMKumuliert|genesenKumuliert|krankKumuliert|verstorbenKumuliert|rateM7Tage)$/gi.test(prop)) picked[prop] = record[prop];
 	}
     return picked;
 });
