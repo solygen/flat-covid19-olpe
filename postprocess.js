@@ -8,8 +8,24 @@ import { readCSV, writeCSV } from 'https://deno.land/x/flat@0.0.10/mod.ts'
 const filename = Deno.args[0]
 const records = await readCSV(filename)
 
-// Step 2: Filter specific data we want to keep and write to a new CSV file
-const processedRecords = records.map(record => {
+// Step 2: build history by adding new and updating existing records
+const allrecords = await readCSV(`data-history.csv`)
+records.each(record => {
+    const existing = allrecords.filter(obj => {
+        return obj.datum === record.datum
+    });
+    if (existing) {
+        // update
+        Object.assign(existing, record)
+    } else {
+        // push
+        allrecords.push(obj)
+    }
+});
+await writeCSV(`data-history.csv`, allrecords)
+
+// Step 3: Filter specific data we want to keep and write to a new CSV file
+const processedRecords = allrecords.map(record => {
     const picked = {};
     for (let prop of Object.keys(record)) {
 		if (/^(datum|anzahlMKumuliert|genesenKumuliert|krankKumuliert|verstorbenKumuliert|rateM7Tage)/gi.test(prop)) picked[prop] = record[prop];
