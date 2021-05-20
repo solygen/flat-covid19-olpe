@@ -13,7 +13,7 @@ const allrecords = await readCSV(`data-history.csv`)
 console.log(records.length, allrecords.length);
 records.forEach(record => {
     const existing = allrecords.find(obj => {
-        console.log(obj.datum, record.datum, String(obj.datum) === String(record.datum);
+        //console.log(obj.datum, record.datum, String(obj.datum) === String(record.datum));
         return String(obj.datum) === String(record.datum)
     });
     if (existing) {
