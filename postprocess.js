@@ -23,7 +23,7 @@ records.forEach(record => {
     } else {
         // push
         console.log('push');
-        allrecords.push(obj)
+        allrecords.push(record)
     }
 });
 await writeCSV(`data-history.csv`, allrecords)
