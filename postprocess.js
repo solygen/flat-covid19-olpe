@@ -10,19 +10,24 @@ const records = await readCSV(filename)
 
 // Step 2: build history by adding new and updating existing records
 const allrecords = await readCSV(`data-history.csv`)
+console.log(records.length, allrecords.length);
 records.forEach(record => {
+    console.log(record.datum)
     const existing = allrecords.filter(obj => {
         return obj.datum === record.datum
     });
     if (existing) {
         // update
+        console.log('update');
         Object.assign(existing, record)
     } else {
         // push
+        console.log('push');
         allrecords.push(obj)
     }
 });
 await writeCSV(`data-history.csv`, allrecords)
+console.log(records.length, allrecords.length);
 
 // Step 3: Filter specific data we want to keep and write to a new CSV file
 const processedRecords = allrecords.map(record => {
