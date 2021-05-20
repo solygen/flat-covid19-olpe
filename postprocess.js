@@ -10,7 +10,7 @@ const records = await readCSV(filename)
 
 // Step 2: build history by adding new and updating existing records
 const allrecords = await readCSV(`data-history.csv`)
-records.each(record => {
+records.forEach(record => {
     const existing = allrecords.filter(obj => {
         return obj.datum === record.datum
     });
