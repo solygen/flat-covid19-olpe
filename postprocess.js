@@ -29,7 +29,7 @@ await writeCSV(`data-history.csv`, allrecords)
 const processedRecords = allrecords.map(record => {
     const picked = {};
     for (let prop of Object.keys(record)) {
-		if (/^(datumstd|anzahlM|anzahlMKumuliert|verstorben|genesenKumuliert|krankKumuliert|verstorbenKumuliert|rateM7Tage)$/gi.test(prop)) picked[prop] = record[prop];
+		if (/^(datumstd|anzahlM|verstorben|krankKumuliert|rateM7Tage)$/gi.test(prop)) picked[prop] = record[prop];
 	}
     return picked;
 });
